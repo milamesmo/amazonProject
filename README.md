@@ -23,8 +23,8 @@ Os arquivos iniciais de estrutura e design foram fornecidos pelo curso para gara
 Acompanhe aqui a evolução das funcionalidades que pretendo implementar:
 
 - [x] Download e organização dos arquivos base.
-- [ ] Criação da lista de produtos dinamicamente com JavaScript.
-- [ ] Implementação da lógica do Carrinho de Compras (Adicionar/Remover).
+- [x] Criação da lista de produtos dinamicamente com JavaScript.
+- [x] Implementação da lógica do Carrinho de Compras (Adicionar/Remover).
 - [ ] Cálculo de subtotais e taxas.
 - [ ] Persistência de dados (Local Storage).
 - [ ] Gerenciamento de datas de entrega.
