@@ -11,7 +11,7 @@ import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 import {
   deliveryOptions,
   getDeliveryOption,
-  calculateDeliveryDate
+  calculateDeliveryDate,
 } from "../../data/deliveryOptions.js";
 import { renderPaymentSummary } from "./paymentSummary.js";
 
@@ -49,7 +49,7 @@ js-cart-item-container-${matchingProduct.id}">
             </div>
             <div class="product-quantity">
                 <span>
-                Quantity: <span class="quantity-label-${matchingProduct.id}">${cartItem.quantity}</span>
+                Quantity: <span class="quantity-label">${cartItem.quantity}</span>
                 </span>
                 <span class="update-quantity-link link-primary js-update-link" data-product-id="${matchingProduct.id}">
                 Update
@@ -114,7 +114,6 @@ js-cart-item-container-${matchingProduct.id}">
       removeFromCart(productId);
 
       renderOrderSumary();
-      updateCartQuantity();
       renderPaymentSummary();
     });
   });
@@ -146,14 +145,9 @@ js-cart-item-container-${matchingProduct.id}">
       const quantityInput = cartItemContainer.querySelector(".quantity-input");
       const newQuantity = Number(quantityInput.value);
 
-      const quantityLabel = document.querySelector(
-        `.quantity-label-${productId}`,
-      );
-      quantityLabel.innerHTML = newQuantity;
 
-      cartItemContainer.classList.remove("js-editing-quantity");
       updateQuantity(productId, newQuantity);
-      updateCartQuantity();
+      renderOrderSumary();
       renderPaymentSummary();
     });
   });
