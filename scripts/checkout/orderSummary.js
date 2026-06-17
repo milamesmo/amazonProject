@@ -42,10 +42,10 @@ js-cart-item-container-${matchingProduct.id}">
             src="${matchingProduct.image}">
 
             <div class="cart-item-details">
-            <div class="product-name">
+            <div class="product-name js-product-name-${matchingProduct.id}">
                 ${matchingProduct.name}
             </div>
-            <div class="product-price">
+            <div class="product-price js-product-price-${matchingProduct.id}">
                 $${formatCurrency(matchingProduct.priceCents)}
             </div>
             <div class="product-quantity
@@ -69,7 +69,7 @@ js-cart-item-container-${matchingProduct.id}">
             <div class="delivery-options-title">
                 Choose a delivery option:
             </div>
-            ${deliveryOptionsHTML(matchingProduct, cartItem)};
+            ${deliveryOptionsHTML(matchingProduct, cartItem)}
         </div>
         </div>
         </div>
@@ -89,11 +89,11 @@ js-cart-item-container-${matchingProduct.id}">
 
       const isChecked = deliveryOption.id === cartItem.deliveryOptionId;
 
-      html += ` <div class="delivery-option js-delivery-option"
+      html += ` <div class="delivery-option js-delivery-option js-delivery-option-${matchingProduct.id}-${deliveryOption.id}"
     data-product-id="${matchingProduct.id}" data-delivery-option-id="${deliveryOption.id}">
                 <input type="radio"
                 ${isChecked ? "checked" : ""}
-                class="delivery-option-input"
+                class="delivery-option-input js-input-delivery-option-${matchingProduct.id}-${deliveryOption.id}"
                 name="delivery-option-${matchingProduct.id}">
                 <div>
                 <div class="delivery-option-date">
@@ -154,6 +154,6 @@ js-cart-item-container-${matchingProduct.id}">
 
       renderOrderSumary();
       renderPaymentSummary();
-    });
+    }, true);
   });
 }

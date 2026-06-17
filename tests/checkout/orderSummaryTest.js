@@ -1,5 +1,7 @@
 import { renderOrderSumary } from "../../scripts/checkout/orderSummary.js";
 import { loadFromStorage, cart } from "../../data/cart.js";
+import { deliveryOptions } from "../../data/deliveryOptions.js";
+import { renderPaymentSummary } from "../../scripts/checkout/paymentSummary.js";
 
 describe("test suite: renderOrderSumary", () => {
   const productId1 = "e43638ce-6aa0-4b85-b27f-e1d07eb678c6";
@@ -28,9 +30,14 @@ describe("test suite: renderOrderSumary", () => {
       ]);
     });
     loadFromStorage();
-    console.log(document.querySelector(".js-payment-summary"));
-
     renderOrderSumary();
+    renderPaymentSummary();
+
+    const selector = `.js-product-name-${productId1}`;
+  });
+
+  afterEach(() => {
+    document.querySelector(".js-test-container").innerHTML = " ";
   });
 
   it("displays the cart", () => {
@@ -45,7 +52,19 @@ describe("test suite: renderOrderSumary", () => {
       document.querySelector(`.js-product-quantity-${productId2}`).innerText,
     ).toContain("Quantity: 1");
 
-    document.querySelector(".js-test-container").innerHTML = " ";
+    expect(
+      document.querySelector(`.js-product-name-${productId1}`).innerText,
+    ).toEqual("Black and Gray Athletic Cotton Socks - 6 Pairs");
+
+    expect(
+      document.querySelector(`.js-product-name-${productId2}`).innerText,
+    ).toEqual("Intermediate Size Basketball");
+
+    expect(
+      document.querySelector(`.js-product-price-${productId1}`).innerText).toEqual("$10.90");
+
+    expect(
+      document.querySelector(`.js-product-price-${productId2}`).innerText).toEqual("$20.95");
   });
 
   it("removes a product", () => {
@@ -59,12 +78,34 @@ describe("test suite: renderOrderSumary", () => {
     ).toEqual(null);
 
     expect(
+      document.querySelector(`.js-product-name-${productId2}`).innerText,
+    ).toEqual("Intermediate Size Basketball");
+
+    expect(
       document.querySelector(`.js-cart-item-container-${productId2}`),
     ).not.toEqual(null);
 
     expect(cart.length).toEqual(1);
     expect(cart[0].productId).toEqual(productId2);
+  });
 
-    document.querySelector(".js-test-container").innerHTML = " ";
+  it("updates the delivery option", () =>{
+  
+    const deliveryOption = document.querySelector(`.js-delivery-option-e43638ce-6aa0-4b85-b27f-e1d07eb678c6-3`);
+    
+    deliveryOption.click();
+    
+    const deliveryOptionInput = document.querySelector('.js-delivery-option-e43638ce-6aa0-4b85-b27f-e1d07eb678c6-3 > input');
+    expect(deliveryOptionInput.checked).toEqual(true);
+    
+    expect(cart.length).toEqual(2);
+    expect(cart[0].productId).toEqual(productId1);
+    expect(cart[0].deliveryOptionId).toEqual('3');
+
+    const paymentShippingTotal = document.querySelector(".shipping-row > .payment-summary-money");
+    const paymentTotal = document.querySelector(".total-row > .payment-summary-money");
+    expect(paymentShippingTotal.innerText).toEqual('$14.98');
+    expect(paymentTotal.innerText).toEqual('$63.50');
   });
 });
+

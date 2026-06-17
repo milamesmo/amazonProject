@@ -41,7 +41,7 @@ export function renderPaymentSummary(matchingProduct) {
             </div>
           </div>
 
-          <div class="payment-summary-row">
+          <div class="payment-summary-row shipping-row">
             <div>Shipping &amp; handling:</div>
             <div class="payment-summary-money">
             $${formatCurrency(shippingPriceCents)}
