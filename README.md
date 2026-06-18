@@ -25,9 +25,9 @@ Acompanhe aqui a evolução das funcionalidades que pretendo implementar:
 - [x] Download e organização dos arquivos base.
 - [x] Criação da lista de produtos dinamicamente com JavaScript.
 - [x] Implementação da lógica do Carrinho de Compras (Adicionar/Remover).
-- [ ] Cálculo de subtotais e taxas.
-- [ ] Persistência de dados (Local Storage).
-- [ ] Gerenciamento de datas de entrega.
+- [x] Cálculo de subtotais e taxas.
+- [x] Persistência de dados (Local Storage).
+- [x] Gerenciamento de datas de entrega.
 
 ## Aprendizados em Foco
 Neste projeto, estou focando em aprender e aplicar:
