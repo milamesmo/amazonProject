@@ -140,7 +140,6 @@ js-cart-item-container-${matchingProduct.id}">
       const quantityInput = cartItemContainer.querySelector(".quantity-input");
       const newQuantity = Number(quantityInput.value);
 
-
       updateQuantity(productId, newQuantity);
       renderOrderSumary();
       renderPaymentSummary();
@@ -148,12 +147,16 @@ js-cart-item-container-${matchingProduct.id}">
   });
 
   document.querySelectorAll(".js-delivery-option").forEach((element) => {
-    element.addEventListener("click", () => {
-      const { productId, deliveryOptionId } = element.dataset;
-      updateDeliveryOption(productId, deliveryOptionId);
+    element.addEventListener(
+      "click",
+      () => {
+        const { productId, deliveryOptionId } = element.dataset;
 
-      renderOrderSumary();
-      renderPaymentSummary();
-    }, true);
+        updateDeliveryOption(productId, deliveryOptionId);
+        renderOrderSumary();
+        renderPaymentSummary();
+      },
+      true,
+    );
   });
 }
