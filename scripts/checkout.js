@@ -3,15 +3,26 @@ import { renderPaymentSummary } from "./checkout/paymentSummary.js";
 import { renderCheckoutHeader } from "./checkout/checkoutHeader.js";
 import { calculateCartQuantity } from "../data/cart.js";
 import { loadProducts } from "../data/products.js";
-import '../data/car.js';
+import { loadCart } from "../data/cart.js";
+
 // import '../data/cart-class.js';
 // import '../data/backend-practice.js';
 
-
-loadProducts(()=> {
-renderOrderSumary();
-renderPaymentSummary();
-const cartQuantity = calculateCartQuantity();
-renderCheckoutHeader(cartQuantity);
+Promise.all([
+new Promise((resolve) => {
+loadProducts(() =>{
+    const cartQuantity = calculateCartQuantity();
+    renderCheckoutHeader(cartQuantity);
+    resolve();
+});
+}),
+new Promise ((resolve)=>{
+        loadCart(() =>{
+            resolve();
+        });
+    })
+]).then(() =>{
+    renderOrderSumary();
+    renderPaymentSummary();   
 });
 
